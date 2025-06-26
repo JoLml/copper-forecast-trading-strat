@@ -1,17 +1,23 @@
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'copper-forecast-trading-strat')))
 
-from utils.data_loader import fetch_copper_data
-from models.feature_engineering import add_technical_indicators
 
-# Fetch raw copper data
-df = fetch_copper_data()
+# Add project root and submodules to sys.path
+project_root = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(project_root)
+sys.path.append(os.path.join(project_root, "models"))
+sys.path.append(os.path.join(project_root, "utils"))
 
-# Add technical indicators
-df = add_technical_indicators(df)
+from models.trainer import train_random_forest
+from models.backtest import run_backtest
 
-# Print last rows to confirm
-print(df.tail())
+def main():
+    print("🔧 Training model...")
+    train_random_forest()
+    
+    print("\n🔁 Running backtest...")
+    run_backtest()
 
-from models.data_preparation import prepare_data
+if __name__ == "__main__":
+    main()
