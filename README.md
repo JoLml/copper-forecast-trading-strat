@@ -1,80 +1,129 @@
 # 🟠 Copper Price Forecasting & Trading Strategy with Machine Learning
 
-This project develops and backtests a **predictive trading strategy** for short-term copper price movements using machine learning on technical indicators.
+## Overview
 
-## 🎯 Project Motivation & Objectives
+This project implements a **machine learning-based predictive trading strategy** targeting short-term price movements of copper, a crucial industrial metal. By leveraging technical indicators and a Random Forest classifier, it forecasts market direction and backtests a rule-based trading strategy to evaluate profitability.
 
-Copper is a key industrial metal, highly sensitive to global economic cycles, making its price forecasting valuable for traders and analysts. This project aims to:
+It showcases practical skills in **financial data science**, **feature engineering**, **machine learning classification**, and **quantitative trading**.
 
-- Collect and analyze historical copper price data  
+---
+
+## Table of Contents
+
+- [Motivation & Objectives](#motivation--objectives)  
+- [Data & Feature Engineering](#data--feature-engineering)  
+- [Modeling Approach](#modeling-approach)  
+- [Strategy Backtesting](#strategy-backtesting)  
+- [Interactive Dashboard](#interactive-dashboard)  
+- [Results & Metrics](#results--metrics)  
+- [Project Structure](#project-structure)  
+- [Tech Stack & Dependencies](#tech-stack--dependencies)  
+- [Getting Started](#getting-started)  
+- [Future Work & Improvements](#future-work--improvements)  
+
+---
+
+## Motivation & Objectives
+
+Copper prices are highly sensitive to global economic cycles, making accurate forecasting valuable for traders and analysts. This project aims to:
+
+- Collect and preprocess historical copper price data  
 - Engineer relevant technical indicators to capture market signals  
-- Train a robust machine learning classifier (Random Forest) to predict price direction  
-- Backtest a trading strategy based on model signals to evaluate profitability  
-- Provide an interactive dashboard for real-time visualization and monitoring  
+- Train a Random Forest classifier to predict price direction (up/down)  
+- Backtest a trading strategy driven by model signals to assess profitability  
+- Provide a user-friendly dashboard for real-time monitoring  
 
-This is a practical example of **financial data science**, **feature engineering**, **machine learning classification**, and **quantitative trading**.
+---
 
-## 🔍 Project Highlights
+## Data & Feature Engineering
 
-- ✅ Data acquisition from Yahoo Finance (`yfinance` package)  
-- 📊 Feature engineering with popular technical indicators:  
-  - Moving averages (MA20, MA50)  
-  - RSI (Relative Strength Index)  
+- Historical copper price data sourced from Yahoo Finance via `yfinance`  
+- Key technical indicators computed include:  
+  - Moving Averages (MA20, MA50)  
+  - Relative Strength Index (RSI)  
   - Bollinger Bands  
-  - MACD (Moving Average Convergence Divergence)  
-  - Momentum and Rate of Change (ROC)  
-  - Volatility measures  
-- 🌲 Machine Learning:  
-  - Random Forest Classifier for direction prediction (up/down)  
-  - Model evaluation with classification reports and feature importance  
-- 📈 Strategy backtesting:  
-  - Simulated trades based on model-generated buy/sell signals  
-  - Cumulative returns comparison against buy-and-hold benchmark  
-- 🖥️ Interactive Streamlit dashboard:  
-  - Latest prediction with confidence scores  
-  - Visual backtest results and performance metrics  
-  - Raw data preview for transparency  
+  - Moving Average Convergence Divergence (MACD)  
+  - Momentum & Rate of Change (ROC)  
+  - 20-day Volatility  
 
-## 📌 Key Metrics (Example)
+These features capture trend, momentum, and volatility aspects of the market.
 
-| Metric                        | Value            |
-|------------------------------|------------------|
-| Model Accuracy (test set)     | ~XX%             |
-| Strategy Cumulative Return    | +YY%             |
-| Market (Buy & Hold) Return    | +ZZ%             |
-| Feature Importance Highlights | MA20, RSI, MACD  |
+---
 
-*(Replace XX, YY, ZZ with your actual results)*
+## Modeling Approach
 
-## ⚙️ Technical Indicators Summary
+- Random Forest Classifier trained on labeled data representing price movement direction  
+- Model evaluated using classification metrics (accuracy, precision, recall)  
+- Feature importance analyzed to identify most predictive indicators  
 
-- **MA20 & MA50:** Capture short- and medium-term price trends  
-- **RSI (14 days):** Measures momentum and overbought/oversold levels  
-- **Bollinger Bands:** Identify volatility and potential price breakouts  
-- **MACD:** Trend-following momentum indicator  
-- **Momentum & ROC:** Quantify speed and magnitude of price changes  
-- **20-day Volatility:** Reflects short-term price fluctuations  
+---
 
-These indicators provide a comprehensive view of trend, momentum, and risk factors.
+## Strategy Backtesting
 
-## 🧰 Tech Stack & Dependencies
+- Trading signals derived from model predictions trigger simulated buy/sell actions  
+- Performance benchmarked against buy-and-hold strategy  
+- Returns and risk metrics computed and visualized  
+
+---
+
+## Interactive Dashboard
+
+Built with Streamlit, the dashboard provides:  
+
+- Latest price prediction with confidence score  
+- Historical backtest performance charts  
+- Raw data and indicator visualization  
+
+---
+
+## Results & Metrics
+
+| Metric                        | Value      |
+|------------------------------|------------|
+| Model Accuracy (test set)     | XX %       |
+| Strategy Cumulative Return    | +YY %      |
+| Buy & Hold Return             | +ZZ %      |
+| Top Features                 | MA20, RSI, MACD |
+
+*Note: Replace XX, YY, ZZ with your actual results.*
+
+---
+
+## Project Structure
+
+copper-forecast-trading-strat/
+├── data/ # Raw and processed data files
+├── models/ # Model code and saved artifacts
+├── notebooks/ # Exploratory data analysis and experiments
+├── strategy/ # Backtesting engine and trading logic
+├── utils/ # Helper functions (data loading, feature engineering)
+├── dashboard.py # Streamlit app entrypoint
+├── main.py # Main script to train, backtest, or run all
+├── requirements.txt # Python dependencies
+└── README.md # This file
+
+
+---
+
+## Tech Stack & Dependencies
 
 - Python 3.13+  
-- yfinance  
-- pandas, numpy  
+- yfinance, pandas, numpy  
 - scikit-learn  
 - matplotlib, seaborn  
 - streamlit  
-- xgboost, prophet (optional for future enhancements)  
+- Optional: xgboost, prophet (future extensions)  
 
-## 🚀 Getting Started & How to Run
+---
+
+## Getting Started
 
 ```bash
 git clone https://github.com/JoLml/copper-forecast-trading-strat.git
 cd copper-forecast-trading-strat
 
 python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
 pip install -r requirements.txt
 
@@ -84,8 +133,23 @@ python main.py --mode train
 # Backtest the strategy
 python main.py --mode backtest
 
-# Train and backtest sequentially
+# Run training + backtesting sequentially
 python main.py --mode all
 
-# Launch the interactive dashboard
+# Launch the dashboard
 streamlit run dashboard.py
+
+
+
+
+## Future Work & Improvements
+
+Incorporate alternative machine learning models (XGBoost, Neural Nets)
+Add hyperparameter tuning and cross-validation
+Integrate additional data sources (fundamental, macroeconomic indicators)
+Develop paper trading or live trading connectivity
+Enhance dashboard with real-time data feeds and alerts
+
+
+Created by Johan Lameul — GitHub
+Feel free to explore, raise issues, or contribute!
