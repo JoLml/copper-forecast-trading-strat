@@ -34,10 +34,12 @@ def train_random_forest():
     print("🧾 Confusion Matrix:")
     print(confusion_matrix(y_test, y_pred))
 
-    # 5. Save model and scaler
-    dump(rf, "models/random_forest_model.joblib")
-    if scaler:
-        dump(scaler, "models/scaler.joblib")
+    # 5. Save model and scaler to same directory as this script
+    model_path = os.path.join(os.path.dirname(__file__), "random_forest_model.joblib")
+    scaler_path = os.path.join(os.path.dirname(__file__), "scaler.joblib")
+    dump(rf, model_path)
+    if scaler is not None:
+        dump(scaler, scaler_path)
 
     print("✅ Model training complete and saved to disk.")
 
